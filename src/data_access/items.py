@@ -3,22 +3,24 @@ import src.models.data_access as DataAccessModels
 import src.models.data_access.errors as DataAccessErrors
 import sqlite3
 
+
 def get_item_by_id(
     db: sqlite3.Connection, id: UUID
 ) -> DataAccessModels.GetItemByID:
-    """Get an item from the database by ID."""
+    """Fetch an item from the database by its ID."""
 
-    cursor = db.execute(
-        "SELECT id, name, quantity FROM items WHERE id = ?", (id,)
-    )
-
-    row = cursor.fetchone()
+    try:
+        cursor = db.execute(
+            "SELECT id, name, quantity FROM items WHERE id = ?",
+            (str(id),),
+        )
+        row = cursor.fetchone()
+    except sqlite3.Error as e:
+        raise DataAccessErrors.DatabaseError(str(e)) from e
 
     if row is None:
-        raise DataAccessErrors.ItemNotFound(f"Failed to find item with id: {str(id)}")
+        raise DataAccessErrors.ItemNotFound(
+            f"Failed to find item with id: {id}"
+        )
 
-    return DataAccessModels.GetItemByID(
-        id=row["id"],
-        name=row["name"],
-        quantity=row["quantity"],
-    )
+    return DataAccessModels.GetItemByID.model_validate(row)

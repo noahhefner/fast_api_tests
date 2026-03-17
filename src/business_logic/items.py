@@ -1,22 +1,23 @@
 from uuid import UUID
-import src.models
-import src.data_access
+import src.models.business as BusinessModels
+import src.models.data_access as DataAccessModels
+import src.data_access.items as DataAccessItems
 import sqlite3
 
 
 def get_item_by_id(
     db: sqlite3.Connection,
     id: UUID,
-) -> src.models.business.result.GetItemByID:
+) -> BusinessModels.GetItemByID:
     """Get item by ID."""
 
-    item: src.models.data_access.GetItemByID = (
+    item: DataAccessModels.GetItemByID = DataAccessItems.get_item_by_id(
         db,
         id,
     )
 
-    return src.models.business.result.GetItemByID(
-        id=data_access_result.id,
-        name=data_access_result.name,
-        quantity=data_access_result.quantity,
+    return BusinessModels.GetItemByID(
+        id=item.id,
+        name=item.name,
+        quantity=item.quantity,
     )

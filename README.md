@@ -181,3 +181,33 @@ This approach works best when:
 - You expect the project to grow
 
 For very small projects, this structure may feel heavy—but it becomes valuable quickly as complexity increases.
+
+## Testing Strategy
+
+This repository uses pytest + FastAPI’s dependency injection system to enable clean, isolated testing.
+
+To run the tests:
+
+```sh
+uv run pytest
+```
+
+The goal is:
+
+- Each test runs against a fresh database
+- No shared state between tests
+- No reliance on application startup side-effects
+- Tests remain fast and deterministic
+
+This aligns with the overall architecture:
+
+- Routers are tested via HTTP calls
+- Business logic remains independent and testable in isolation
+- Data access is exercised against a real (but temporary) database
+
+Benefits:
+
+- No mocking required for basic integration tests
+- Realistic behavior (actual SQL execution)
+- Fully isolated test environment
+- Scales to other databases (PostgreSQL, etc.)

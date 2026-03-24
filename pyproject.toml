@@ -6,6 +6,8 @@ readme = "README.md"
 requires-python = ">=3.13"
 dependencies = [
     "fastapi[standard]>=0.135.1",
+    "httpx>=0.28.1",
+    "pytest>=9.0.2",
 ]
 
 [dependency-groups]
@@ -14,3 +16,6 @@ dev = [
     "ruff>=0.15.6",
     "ty>=0.0.23",
 ]
+
+[tool.pytest.ini_options]
+pythonpath = ["."]

@@ -23,8 +23,8 @@ def get_item_by_id(id: UUID, db: sqlite3.Connection = Depends(get_db)):
             db,
             id,
         )
-    except BusinessErrors.DatabaseError:
-        # TODO: Log the error here
+    except BusinessErrors.DatabaseError as e:
+        print(str(e))
         raise HTTPException(
             status_code=500,
             detail="Internal server error",

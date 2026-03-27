@@ -5,7 +5,7 @@ description = "Add your description here"
 readme = "README.md"
 requires-python = ">=3.13"
 dependencies = [
-    "fastapi[standard]>=0.135.1",
+    "fastapi[standard]>=0.135.2",
     "httpx>=0.28.1",
     "pytest>=9.0.2",
 ]
@@ -13,8 +13,9 @@ dependencies = [
 [dependency-groups]
 dev = [
     "isort>=8.0.1",
-    "ruff>=0.15.6",
-    "ty>=0.0.23",
+    "ruff>=0.15.8",
+    "ty>=0.0.26",
+    "uv-upsync>=2.2.0",
 ]
 
 [tool.pytest.ini_options]

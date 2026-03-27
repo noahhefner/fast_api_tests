@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 
-from src.routers.domains import items, orders
+from src.routers import items, orders
 
 app = FastAPI(
     title="FastAPI Test Repo Structure",

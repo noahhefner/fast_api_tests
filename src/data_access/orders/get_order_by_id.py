@@ -1,8 +1,9 @@
 import sqlite3
 from uuid import UUID
 
-import src.data_access.errors as DataAccessErrors
-import src.data_access.models as DataAccessModels
+import src.data_access.errors as CommonDataAccessErrors
+import src.data_access.orders.errors as DataAccessErrors
+import src.data_access.orders.models as DataAccessModels
 
 
 def get_order_by_id(db: sqlite3.Connection, id: UUID) -> DataAccessModels.GetOrderByID:
@@ -16,7 +17,7 @@ def get_order_by_id(db: sqlite3.Connection, id: UUID) -> DataAccessModels.GetOrd
         )
         row = cursor.fetchone()
     except sqlite3.Error as e:
-        raise DataAccessErrors.DatabaseError(str(e)) from e
+        raise CommonDataAccessErrors.DatabaseError(str(e)) from e
 
     if row is None:
         raise DataAccessErrors.OrderNotFound(f"Failed to find order with id: {id}")

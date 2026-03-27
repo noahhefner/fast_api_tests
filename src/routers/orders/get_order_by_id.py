@@ -3,10 +3,11 @@ from uuid import UUID
 
 from fastapi import APIRouter, Depends, HTTPException
 
-import src.business_logic.domains.orders as OrdersBusinessLogic
-import src.business_logic.errors as BusinessErrors
-import src.business_logic.models as BusinessModels
-import src.routers.response_models as ResponseModels
+import src.business_logic.errors as CommonBusinessErrors
+import src.business_logic.orders as BusinessLogic
+import src.business_logic.orders.errors as BusinessErrors
+import src.business_logic.orders.models as BusinessModels
+import src.routers.orders.response_models as ResponseModels
 from src.db import get_db
 
 router = APIRouter()
@@ -19,11 +20,11 @@ def get_order_by_id(id: UUID, db: sqlite3.Connection = Depends(get_db)):
     responses.
     """
     try:
-        order: BusinessModels.GetOrderByID = OrdersBusinessLogic.get_order_by_id(
+        order: BusinessModels.GetOrderByID = BusinessLogic.get_order_by_id(
             db,
             id,
         )
-    except BusinessErrors.DatabaseError:
+    except CommonBusinessErrors.DatabaseError:
         raise HTTPException(
             status_code=500,
             detail="Internal server error",

@@ -9,8 +9,8 @@ import src.business_logic.items.errors as BusinessErrors
 import src.business_logic.items.models as BusinessModels
 import src.routers.items.response_models as ResponseModels
 from src.db import get_db
-from src.dependencies import get_user
-from src.dependencies.models import User
+from src.dependencies.get_user import get_user
+from src.dependencies.get_user.models import User
 
 router = APIRouter()
 

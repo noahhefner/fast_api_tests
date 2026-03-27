@@ -1,6 +1,6 @@
 from uuid import UUID
 
-from src.dependencies.models import User
+from src.dependencies.get_user.models import User
 
 
 def get_user(id: UUID) -> User:

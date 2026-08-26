@@ -5,9 +5,9 @@ description = "FastAPI Project Repository Example"
 readme = "README.md"
 requires-python = ">=3.13"
 dependencies = [
-    "fastapi[standard]>=0.139.2",
+    "fastapi[standard]>=0.141.1",
     "httpx>=0.28.1",
-    "sqlalchemy>=2.0.51",
+    "sqlalchemy>=2.0.52",
 ]
 
 [dependency-groups]
@@ -15,8 +15,8 @@ dev = [
     "isort>=8.0.1",
     "pyclean>=3.7.0",
     "pytest>=9.1.1",
-    "ruff>=0.15.22",
-    "ty>=0.0.61",
+    "ruff>=0.16.4",
+    "ty>=0.0.74",
     "uv-upsync>=2.4.1",
 ]
 
